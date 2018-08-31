@@ -1,0 +1,111 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{22360453-B878-49FA-A5DC-0D9C577DE902}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>PepLib</RootNamespace>
+    <AssemblyName>PepLib</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="DotNetZip, Version=1.10.1.0, Culture=neutral, PublicKeyToken=6583c7c814667745, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\DotNetZip.1.10.1\lib\net20\DotNetZip.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="AngleConverter.cs" />
+    <Compile Include="ApplicationType.cs" />
+    <Compile Include="Box.cs" />
+    <Compile Include="Codes\CircularMove.cs" />
+    <Compile Include="Codes\EntityType.cs" />
+    <Compile Include="Codes\Motion.cs" />
+    <Compile Include="Codes\RapidMove.cs" />
+    <Compile Include="Codes\SubProgramCall.cs" />
+    <Compile Include="Codes\Comment.cs" />
+    <Compile Include="Codes\CodeType.cs" />
+    <Compile Include="Codes\ICode.cs" />
+    <Compile Include="Generic.cs" />
+    <Compile Include="IniConfig.cs" />
+    <Compile Include="IO\MaterialDataReader.cs" />
+    <Compile Include="NestDrawing.cs" />
+    <Compile Include="NestIndex.cs" />
+    <Compile Include="IO\ProgramReader.cs" />
+    <Compile Include="KerfType.cs" />
+    <Compile Include="Codes\LinearMove.cs" />
+    <Compile Include="MathHelper.cs" />
+    <Compile Include="Node.cs" />
+    <Compile Include="Part.cs" />
+    <Compile Include="PartListExtensions.cs" />
+    <Compile Include="RotationType.cs" />
+    <Compile Include="Codes\SetFeedrate.cs" />
+    <Compile Include="Codes\SetKerf.cs" />
+    <Compile Include="IMovable.cs" />
+    <Compile Include="ProgrammingMode.cs" />
+    <Compile Include="Tolerance.cs" />
+    <Compile Include="IO\DrawingInfoReader.cs" />
+    <Compile Include="Drawing.cs" />
+    <Compile Include="DrawingInfo.cs" />
+    <Compile Include="DrawingType.cs" />
+    <Compile Include="GrainType.cs" />
+    <Compile Include="IO\DrawingReader.cs" />
+    <Compile Include="IO\LoopReader.cs" />
+    <Compile Include="IO\NestReader.cs" />
+    <Compile Include="Loop.cs" />
+    <Compile Include="Machine.cs" />
+    <Compile Include="Material.cs" />
+    <Compile Include="Nest.cs" />
+    <Compile Include="NestInfo.cs" />
+    <Compile Include="IO\NestInfoReader.cs" />
+    <Compile Include="Util.cs" />
+    <Compile Include="Plate.cs" />
+    <Compile Include="PlateListExtensions.cs" />
+    <Compile Include="IO\PlateReader.cs" />
+    <Compile Include="Size.cs" />
+    <Compile Include="Program.cs" />
+    <Compile Include="IO\ReportReader.cs" />
+    <Compile Include="Spacing.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Report.cs" />
+    <Compile Include="Report.Drawing.cs" />
+    <Compile Include="Report.Plate.cs" />
+    <Compile Include="StatusType.cs" />
+    <Compile Include="Vector.cs" />
+    <Compile Include="ZipHelper.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
