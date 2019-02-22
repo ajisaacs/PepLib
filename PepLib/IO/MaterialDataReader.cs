@@ -17,6 +17,7 @@ namespace PepLib.IO
         {
             const int dataLength = 2000;
             var count = stream.Length / dataLength;
+            var binreader = new BinaryReader(stream);
 
             for (int i = 0; i < count; i++)
             {
@@ -27,6 +28,9 @@ namespace PepLib.IO
                 data.Id = id;
                 data.Grade = ReadString(16, ref stream);
                 data.Name = ReadString(200, ref stream);
+                data.Density = binreader.ReadDouble();
+                stream.Seek(8, SeekOrigin.Current);
+                data.Thickness = binreader.ReadDouble();
 
                 Materials.Add(data);
 
@@ -78,5 +82,9 @@ namespace PepLib.IO
         public string Name { get; set; }
 
         public string Grade { get; set; }
+
+        public double Density { get; set; }
+
+        public double Thickness { get; set; }
     }
 }
