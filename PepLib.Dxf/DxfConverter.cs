@@ -27,7 +27,7 @@ namespace PepLib.Dxf
 
             rapidLayer = new Layer("Rapid");
             rapidLayer.Color = AciColor.Blue;
-            rapidLayer.LineType = LineType.Dashed;
+            rapidLayer.Linetype = Linetype.Dashed;
 
             plateLayer = new Layer("Plate");
             plateLayer.Color = AciColor.Cyan;
