@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using PepLib.Codes;
 using PepLib.IO;
 
 namespace PepLib
@@ -28,6 +29,58 @@ namespace PepLib
             var reader = new DrawingReader();
             reader.Read(stream);
             return reader.Drawing;
+        }
+
+        public void ResolveLoops()
+        {
+            for (int i = 0; i < Loops.Count; ++i)
+            {
+                var loop = Loops[i];
+                ResolveLoops(loop);
+            }
+        }
+
+        private void ResolveLoops(Program pgm)
+        {
+            for (int i = 0; i < pgm.Count; ++i)
+            {
+                var code = pgm[i];
+
+                if (code.CodeType() != CodeType.SubProgramCall)
+                    continue;
+
+                var subpgmcall = (SubProgramCall)code;
+
+                var loop = GetLoop(subpgmcall.LoopId);
+
+                if (loop == null)
+                    throw new Exception("Loop not found");
+
+                subpgmcall.Loop = loop;
+            }
+        }
+
+        public Loop GetLoop(int id)
+        {
+            string name = GetLoopName(id);
+            return GetLoop(name);
+        }
+
+
+        private Loop GetLoop(string name)
+        {
+            for (int i = 0; i < Loops.Count; ++i)
+            {
+                if (Loops[i].Name == name)
+                    return Loops[i];
+            }
+
+            return null;
+        }
+
+        private string GetLoopName(int loopId)
+        {
+            return string.Format("{0}.loop-{1}", Info.Name, loopId.ToString().PadLeft(3, '0'));
         }
 
         public static bool TryLoad(string nestfile, out Drawing drawing)

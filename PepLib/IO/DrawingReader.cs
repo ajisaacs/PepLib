@@ -22,7 +22,6 @@ namespace PepLib.IO
 
         public void Read(Stream stream)
         {
-            var drawing = new Drawing();
             var zipStream = new ZipInputStream(stream);
 
             ZipEntry theEntry;
@@ -58,12 +57,14 @@ namespace PepLib.IO
                 }
 
                 if (Regex.IsMatch(extension, "loop-\\d\\d\\d"))
-                    drawing.Loops.Add(ReadLoop(theEntry.FileName, memstream));
+                    Drawing.Loops.Add(ReadLoop(theEntry.FileName, memstream));
 
                 memstream.Close();
             }
 
             zipStream.Close();
+
+            Drawing.ResolveLoops();
         }
 
         public void Read(string nestFile)
