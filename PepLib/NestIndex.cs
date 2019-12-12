@@ -39,7 +39,7 @@ namespace PepLib
 
             while (reader.Read(buffer, 0, buffer.Length) > 0)
             {
-                var memstream = new MemoryStream(Encoding.Default.GetBytes(buffer));
+                var memstream = new MemoryStream(Encoding.ASCII.GetBytes(buffer));
                 var inforeader = new NestInfoReader();
 
                 inforeader.Read(memstream);
