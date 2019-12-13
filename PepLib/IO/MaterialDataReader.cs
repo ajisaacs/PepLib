@@ -25,7 +25,7 @@ namespace PepLib.IO
 
                 int id;
                 int.TryParse(ReadString(64, ref stream), out id);
-                data.Id = id;
+                data.Number = id;
                 data.Grade = ReadString(16, ref stream);
                 data.Name = ReadString(200, ref stream);
                 data.Density = binreader.ReadDouble();
@@ -77,7 +77,7 @@ namespace PepLib.IO
 
     public class MaterialData
     {
-        public int Id { get; set; }
+        public int Number { get; set; }
 
         public string Name { get; set; }
 
