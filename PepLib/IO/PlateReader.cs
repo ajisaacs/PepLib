@@ -25,46 +25,62 @@ namespace PepLib.IO
 
             Plate.Name = name;
 
-            foreach (var code in pgm)
+            for (int i = 0; i < pgm.Count; i++)
             {
-                switch (code.CodeType())
+                var block = pgm[i];
+
+                switch (block.CodeType())
                 {
                     case CodeType.CircularMove:
-                    {
-                        var arc = (CircularMove)code;
-                        pos = arc.EndPoint;
-                        break;
-                    }
+                        {
+                            var arc = (CircularMove)block;
+                            pos = arc.EndPoint;
+                            break;
+                        }
 
                     case CodeType.LinearMove:
-                    {
-                        var line = (LinearMove)code;
-                        pos = line.EndPoint;
-                        break;
-                    }
+                        {
+                            var line = (LinearMove)block;
+                            pos = line.EndPoint;
+                            break;
+                        }
 
                     case CodeType.RapidMove:
-                    {
-                        var rapid = (RapidMove)code;
-                        pos = rapid.EndPoint;
-                        break;
-                    }
+                        {
+                            var rapid = (RapidMove)block;
+                            pos = rapid.EndPoint;
+                            break;
+                        }
 
                     case CodeType.Comment:
-                    {
-                        var comment = (Comment)code;
-                        LoadInfo(comment.Value);
-                        break;
-                    }
+                        {
+                            var comment = (Comment)block;
+                            LoadInfo(comment.Value);
+                            break;
+                        }
 
                     case CodeType.SubProgramCall:
-                    {
-                        var subpgm = (SubProgramCall)code;
-                        var loop = nest.GetLoop(subpgm.LoopId);
-                        var part = Part.Create(loop, pos, AngleConverter.ToRadians(subpgm.Rotation));
-                        Plate.Parts.Add(part);
-                        break;
-                    }
+                        {
+                            var subpgm = (SubProgramCall)block;
+                            var loop = nest.GetLoop(subpgm.LoopId);
+                            var part = Part.Create(loop, pos, AngleConverter.ToRadians(subpgm.Rotation));
+
+                            var nextBlock = pgm[i + 1];
+
+                            if (nextBlock.CodeType() == CodeType.Comment)
+                            {
+                                var comment = nextBlock as Comment;
+                                
+                                if (comment.Value == "DISPLAY ONLY")
+                                {
+                                    part.IsDisplayOnly = true;
+                                    i++;
+                                }
+                            }
+
+                            Plate.Parts.Add(part);
+                            break;
+                        }
                 }
             }
         }

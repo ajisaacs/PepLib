@@ -71,6 +71,8 @@ namespace PepLib
             get { return baseLoop.Rotation; }
         }
 
+        public bool IsDisplayOnly { get; set; } = false;
+
         public void Rotate(double angle)
         {
             baseLoop.Rotate(angle);
