@@ -147,17 +147,19 @@ namespace PepLib.IO
 
         private void LoadDrawingInfo(Stream stream)
         {
-            var reader = new BinaryReader(stream);
             var buffer = new byte[2000];
 
             while (stream.Read(buffer, 0, buffer.Length) > 0)
             {
-                var name = Encoding.Default.GetString(buffer, 200, 200);
+                var name = Encoding.Default.GetString(buffer, 200, 200).Trim();
                 var qty = BitConverter.ToInt32(buffer, 432);
-                var drawing = new NestDrawing();
 
-                drawing.Name = Encoding.Default.GetString(buffer, 200, 200).Trim();
-                drawing.QtyRequired = BitConverter.ToInt32(buffer, 432);
+                var drawing = new NestDrawing
+                {
+                    Name = name,
+                    QtyRequired = qty
+                };
+
                 Nest.Drawings.Add(drawing);
             }
         }
